@@ -73,6 +73,10 @@ namespace sort
                 await QuickSortAnimationAsync(low, partitionIndex - 1);
                 await QuickSortAnimationAsync(partitionIndex + 1, high);
             }
+            for (int j = low; j <= high; j++)
+            {
+                ArrayCreator.Rectangles[j].Fill = Brushes.Green;
+            }
         }
 
         private async Task<int> PartitionAsync(int low, int high)
@@ -82,22 +86,23 @@ namespace sort
 
             for (int j = low; j < high; j++)
             {
-                ArrayCreator.Rectangles[j].Fill = Brushes.Yellow;
                 if (GetHeight(ArrayCreator.Rectangles[j]) < pivot)
                 {
+                    ArrayCreator.Rectangles[j].Fill = Brushes.Red;
                     i++;
+                    ArrayCreator.Rectangles[i].Fill = Brushes.Red;
                     await SwapAsync(i, j);
+                    ArrayCreator.Rectangles[i].Fill = Brushes.Blue;
+                    Logger l1 = new(i, j);
+                    ArrayCreator.Rectangles[j].Fill = Brushes.Blue;
                 }
-                ArrayCreator.Rectangles[j].Fill = Brushes.Blue;
             }
-
+            ArrayCreator.Rectangles[i + 1].Fill = Brushes.Red;
+            ArrayCreator.Rectangles[high].Fill = Brushes.Red;
             await SwapAsync(i + 1, high);
-            Logger l = new(i + 1, high);
-
-            for (int j = low; j <= high; j++)
-            {
-                ArrayCreator.Rectangles[j].Fill = Brushes.Green;
-            }
+            Logger l2 = new(i + 1, high);
+            ArrayCreator.Rectangles[i + 1].Fill = Brushes.Blue;
+            ArrayCreator.Rectangles[high].Fill = Brushes.Blue;
 
             return i + 1;
         }
