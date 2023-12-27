@@ -73,10 +73,6 @@ namespace sort
                 await QuickSortAnimationAsync(low, partitionIndex - 1);
                 await QuickSortAnimationAsync(partitionIndex + 1, high);
             }
-            for (int j = low; j <= high; j++)
-            {
-                ArrayCreator.Rectangles[j].Fill = Brushes.Green;
-            }
         }
 
         private async Task<int> PartitionAsync(int low, int high)

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace sort
 {
@@ -41,6 +42,10 @@ namespace sort
                     case "Quick Sort":
                         Logger clear = new();
                         await animation.QuickSortAnimationAsync(0, ArrayCreator.ArraySize - 1);
+                        for (int j = 0; j <= ArrayCreator.ArraySize - 1; j++)
+                        {
+                            ArrayCreator.Rectangles[j].Fill = Brushes.Green;
+                        }
                         break;
                     case "Heap Sort":
                         await animation.HeapSortAnimationAsync();
